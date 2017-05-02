@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:layout_width="match_parent"
+             android:layout_height="180dp"
+             android:orientation="vertical">
+
+    <com.example.showapp.view.WaveBackGroundVIew
+        android:id="@+id/wbg"
+        android:textSize="30sp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="180dp"-->
+        <!--android:background="@android:color/transparent"-->
+        <!--android:padding="10dp">-->
+
+        <!--&lt;!&ndash;*************** 头像 ****************&ndash;&gt;-->
+
+
+        <!--<de.hdodenhof.circleimageview.CircleImageView-->
+            <!--android:id="@+id/icon_image"-->
+            <!--android:layout_width="70dp"-->
+            <!--android:layout_height="70dp"-->
+            <!--android:layout_centerInParent="true"-->
+            <!--android:src="@drawable/hander"/>-->
+
+        <!--&lt;!&ndash;*************** 邮箱 ****************&ndash;&gt;-->
+        <!--<TextView-->
+            <!--android:id="@+id/mail"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:gravity="center"-->
+            <!--android:text="657116885@qq.com"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="14sp"/>-->
+
+        <!--&lt;!&ndash;*************** 用户名 ****************&ndash;&gt;-->
+        <!--<TextView-->
+            <!--android:id="@+id/username"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_above="@+id/mail"-->
+            <!--android:gravity="center"-->
+            <!--android:text="baiyu5271"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="14sp"/>-->
+    <!--</RelativeLayout>-->
+
+</FrameLayout>
