@@ -97,15 +97,15 @@ public class GuideActivity extends BaseActivity implements ViewPager.OnPageChang
                 .setDuration(500).start();
 
         mTv2.setAlpha(0f);
-        mTv2.setScaleX(0.8f);
-        mTv2.setScaleY(0.8f);
         mTv3.setAlpha(0f);
-        mTv3.setScaleX(0.8f);
-        mTv3.setScaleY(0.8f);
 
         mAdapter = new GuidePagerAdapter(imageViews);
         mVp.setAdapter(mAdapter);
         mVp.setOnPageChangeListener(this);
+
+        mBtGuide.setClickable(false);
+        mBtGuide.setVisibility(View.VISIBLE);
+        mBtGuide.setAlpha(0);
 
         //viewpager全屏显示时不适合加动画
         //mVp.setPageTransformer(true,new GuideViewPageTransformer());
@@ -120,8 +120,13 @@ public class GuideActivity extends BaseActivity implements ViewPager.OnPageChang
 
     private boolean flag = false;
 
+    private float prePosition = 0;
+
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        //字和按钮随着pager滑动而改变透明度
+
         if (width == 0) {
             width = mLlPoint.getChildAt(1).getLeft() - mLlPoint.getChildAt(0).getLeft();
         }
@@ -131,12 +136,71 @@ public class GuideActivity extends BaseActivity implements ViewPager.OnPageChang
         params.leftMargin = (int) (position * width + positionOffset * width);
         mPointRed.setLayoutParams(params);
 
+        //控制按钮的显示
+        if (position == 2)
+            mBtGuide.setClickable(true);
+
+        if (position + positionOffset > 0 && position + positionOffset < 1 && position + positionOffset - prePosition > 0) {
+
+            mTv1.setAlpha(1 - positionOffset);
+            mTv1.setScaleX(1 - 0.2f * positionOffset);
+            mTv1.setScaleY(1 - 0.2f * positionOffset);
+
+            mTv2.setAlpha(positionOffset);
+            mTv2.setScaleX(0.8f + 0.2f * positionOffset);
+            mTv2.setScaleY(0.8f + 0.2f * positionOffset);
+
+            mTv3.setAlpha(0);
+            prePosition = position + positionOffset;
+        } else if (position + positionOffset > 1 && position + positionOffset < 2 && position + positionOffset - prePosition > 0) {
+            mTv2.setAlpha(1 - positionOffset);
+            mTv2.setScaleX(1 - 0.2f * positionOffset);
+            mTv2.setScaleY(1 - 0.2f * positionOffset);
+
+            mTv3.setAlpha(positionOffset);
+            mTv3.setScaleX(0.8f + 0.2f * positionOffset);
+            mTv3.setScaleY(0.8f + 0.2f * positionOffset);
+
+            mBtGuide.setAlpha(positionOffset);
+            mBtGuide.setScaleX(0.8f + 0.2f * positionOffset);
+            mBtGuide.setScaleY(0.8f + 0.2f * positionOffset);
+
+            prePosition = position + positionOffset;
+        } else if (position + positionOffset > 1 && position + positionOffset < 2 && position + positionOffset - prePosition < 0) {
+            mTv3.setAlpha(1 - (1 - positionOffset));
+            mTv3.setScaleX(1 - 0.2f * (1 - positionOffset));
+            mTv3.setScaleY(1 - 0.2f * (1 - positionOffset));
+
+            mTv2.setAlpha((1 - positionOffset));
+            mTv2.setScaleX(0.8f + 0.2f * (1 - positionOffset));
+            mTv2.setScaleY(0.8f + 0.2f * (1 - positionOffset));
+
+            mBtGuide.setAlpha(1 - (1 - positionOffset));
+            mBtGuide.setScaleX(1 - 0.2f * (1 - positionOffset));
+            mBtGuide.setScaleY(1 - 0.2f * (1 - positionOffset));
+
+            prePosition = position + positionOffset;
+        } else if (position + positionOffset > 0 && position + positionOffset < 1 && position + positionOffset - prePosition < 0) {
+            System.out.println("1 ---> 0");
+            mTv2.setAlpha(1 - (1 - positionOffset));
+            mTv2.setScaleX(1 - 0.2f * (1 - positionOffset));
+            mTv2.setScaleY(1 - 0.2f * (1 - positionOffset));
+
+            mTv1.setAlpha((1 - positionOffset));
+            mTv1.setScaleX(0.8f + 0.2f * (1 - positionOffset));
+            mTv1.setScaleY(0.8f + 0.2f * (1 - positionOffset));
+
+            mTv3.setAlpha(0);
+
+            prePosition = position + positionOffset;
+        }
+
     }
 
     @Override
     public void onPageSelected(int position) {
-
-        //控制按钮的显示
+        //pager滑动停止后才有动画
+/*//控制按钮的显示
         if (position == 2) {
             //显示
             mBtGuide.setClickable(true);
@@ -212,7 +276,8 @@ public class GuideActivity extends BaseActivity implements ViewPager.OnPageChang
                     .scaleX(1f)
                     .scaleY(1f)
                     .setDuration(500).start();
-        }
+        }*/
+
     }
 
     @Override
